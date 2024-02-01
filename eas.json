@@ -1,0 +1,49 @@
+{
+    "cli": {
+      "version": ">= 3.1.1"
+    },
+    "build": {
+      "development-simulator": {
+        "developmentClient": true,
+        "distribution": "internal",
+        "credentialsSource": "remote",
+        "ios": {
+          "simulator": true
+        },
+        "android": {
+          "buildType": "apk"
+        },
+        "channel": "main"
+      },
+      "development": {
+        "developmentClient": true,
+        "distribution": "internal",
+        "credentialsSource": "remote",
+        "channel": "main",
+        "android": {
+          "buildType": "apk",
+          "gradleCommand": ":app:assembleDebug"
+        }
+      },
+      "production": {
+        "credentialsSource": "remote",
+        "channel": "main",
+        "distribution": "store",
+        "android": {
+          "credentialsSource": "local",
+          "buildType": "apk",
+          "gradleCommand": ":app:assembleRelease"
+        },
+        "autoIncrement": true
+      }
+    },
+    "submit": {
+      "production": {
+        "android": {
+          "serviceAccountKeyPath": "./credentials/android/newssmnotifications-firebase-adminsdk.json",
+          "track": "production"
+        }
+      }
+    }
+  }
+  
