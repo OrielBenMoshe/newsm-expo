@@ -25,7 +25,7 @@
         "backgroundColor": "#ffffff"
       },
       "package": "il.co.newsm",
-      "versionCode": 11
+      "versionCode": 12
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -60,6 +60,13 @@
           "mode": "development",
           "devTeam": "P2K4MAGBT8",
           "iPhoneDeploymentTarget": "13.0"
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/notification_icon.png",
+          "color": "#ffffff"
         }
       ],
       "expo-localization"

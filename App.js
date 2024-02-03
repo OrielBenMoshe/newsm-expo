@@ -1,6 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
 import {
-  ActivityIndicator,
   AppRegistry,
   StyleSheet,
   View,
@@ -10,10 +9,7 @@ import {
   Image,
 } from "react-native";
 import WebView from "react-native-webview";
-import { OneSignal, LogLevel } from "react-native-onesignal";
-import Constants from "expo-constants";
 import Signal from "./services/Signal";
-import * as Localization from "expo-localization";
 
 const MyStatusBar = ({ backgroundColor, ...props }) => (
   <View style={[styles.statusBar, { backgroundColor }]}>
@@ -26,6 +22,7 @@ const MyStatusBar = ({ backgroundColor, ...props }) => (
 export default function App() {
   const [webViewSource, setWebViewSource] = useState("https://newsm.co.il");
   const [showWebView, setShowWebview] = useState(false);
+  
   const redirect = useCallback((data) => {
     if (data.targetUrl) {
       setShowWebview(false);
@@ -35,14 +32,6 @@ export default function App() {
       }, 500);
     }
   }, []);
-
-  const lang = Localization.getLocales().languageCode;
-
-  useEffect(() => {
-    if (lang === "he") setWebViewSource("https://newsm.co.il");
-    else setWebViewSource("https://positive-angle.com");
-    setShowWebview(true)
-  }, [lang]);
 
   useEffect(() => {
     Signal.Register(redirect);
