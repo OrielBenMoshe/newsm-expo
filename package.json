@@ -22,15 +22,14 @@
     "expo": "~50.0.5",
     "expo-constants": "^15.4.5",
     "expo-dev-client": "~3.3.8",
+    "expo-notifications": "~0.27.6",
     "expo-status-bar": "~1.11.1",
     "expo-updates": "~0.24.9",
     "onesignal-expo-plugin": "^2.0.2",
     "react": "18.2.0",
     "react-native": "0.73.2",
     "react-native-onesignal": "^5.0.4",
-    "react-native-webview": "^13.6.4",
-    "expo-localization": "~14.8.3",
-    "expo-notifications": "~0.27.6"
+    "react-native-webview": "^13.6.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

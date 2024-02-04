@@ -21,7 +21,7 @@ const MyStatusBar = ({ backgroundColor, ...props }) => (
 
 export default function App() {
   const [webViewSource, setWebViewSource] = useState("https://newsm.co.il");
-  const [showWebView, setShowWebview] = useState(false);
+  const [showWebView, setShowWebview] = useState(true);
   
   const redirect = useCallback((data) => {
     if (data.targetUrl) {

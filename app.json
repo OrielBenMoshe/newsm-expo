@@ -25,7 +25,7 @@
         "backgroundColor": "#ffffff"
       },
       "package": "il.co.newsm",
-      "versionCode": 12
+      "versionCode": 14
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -68,8 +68,7 @@
           "icon": "./assets/notification_icon.png",
           "color": "#ffffff"
         }
-      ],
-      "expo-localization"
+      ]
     ],
     "runtimeVersion": {
       "policy": "appVersion"
