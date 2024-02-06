@@ -25,7 +25,7 @@
         "backgroundColor": "#F6F6F6"
       },
       "package": "il.co.newsm",
-      "versionCode": 21
+      "versionCode": 22
     },
     "web": {
       "favicon": "./assets/favicon.png"
