@@ -22,10 +22,10 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/android.png",
-        "backgroundColor": "#F6F6F6"
+        "backgroundColor": "#F2F2F2"
       },
       "package": "il.co.newsm",
-      "versionCode": 22
+      "versionCode": 23
     },
     "web": {
       "favicon": "./assets/favicon.png"
