@@ -25,7 +25,7 @@
         "backgroundColor": "#F6F6F6"
       },
       "package": "il.co.newsm",
-      "versionCode": 19
+      "versionCode": 21
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -62,9 +62,6 @@
           "iPhoneDeploymentTarget": "13.0",
           "smallIcons": [
             "./assets/ic_stat_onesignal_default.png"
-          ],
-          "largeIcons": [
-            "./assets/ic_onesignal_large_icon_default.png"
           ]
         }
       ]
