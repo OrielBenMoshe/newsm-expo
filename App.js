@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import {
   AppRegistry,
   StyleSheet,
@@ -7,8 +7,12 @@ import {
   Platform,
   SafeAreaView,
   Image,
+  BackHandler,
+  Share,
+  Linking,
 } from "react-native";
 import WebView from "react-native-webview";
+import * as WebBrowser from "expo-web-browser";
 import Signal from "./services/Signal";
 
 const MyStatusBar = ({ backgroundColor, ...props }) => (
@@ -18,11 +22,64 @@ const MyStatusBar = ({ backgroundColor, ...props }) => (
     </SafeAreaView>
   </View>
 );
+const Website = "https://newsm.co.il";
 
 export default function App() {
-  const [webViewSource, setWebViewSource] = useState("https://newsm.co.il");
+  const [webViewSource, setWebViewSource] = useState(Website);
   const [showWebView, setShowWebview] = useState(true);
-  
+  const webviewRef = useRef(null);
+
+  // Function to inject JavaScript code into the WebView
+  const injectShareScript = () => {
+    const script = `
+    (function() {
+      function addShareButtonListener() {
+        document.querySelectorAll('.share-button').forEach(button => {
+          // Ensure we don't attach the event more than once
+          if (!button.hasAttribute('data-share-listener')) {
+            button.setAttribute('data-share-listener', 'true');
+            button.addEventListener('click', function(e) {
+              e.preventDefault();
+              const urlToShare = window.location.href; // Or any specific URL you want to share
+              window.ReactNativeWebView.postMessage(urlToShare);
+            });
+          }
+        });
+      }
+
+      // Initial application of the listener
+      addShareButtonListener();
+
+      // Use MutationObserver to monitor the DOM for changes and apply the listener to new buttons
+      const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.addedNodes && mutation.addedNodes.length > 0) {
+            // Re-apply listener whenever new nodes are added to the DOM
+            addShareButtonListener();
+          }
+        });
+      });
+
+      // Configuration of the observer:
+      const config = { childList: true, subtree: true };
+
+      // Pass in the target node, as well as the observer options
+      observer.observe(document.body, config);
+    })();
+    true; // Ensures the injected script executes
+  `;
+    webviewRef.current.injectJavaScript(script);
+  };
+
+  // Handle messages received from the WebView
+  const onMessage = (event) => {
+    const url = event.nativeEvent.data;
+    Share.share({
+      message: `Check this out: ${url}`,
+      url: url, // Some platforms might use this field
+    });
+  };
+
   const redirect = useCallback((data) => {
     if (data.targetUrl) {
       setShowWebview(false);
@@ -34,10 +91,19 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    Signal.Register(redirect);
+    const backAction = () => {
+      if (webviewRef.current) {
+        webviewRef.current.goBack();
+        return true; // Prevent default behavior (exiting the app)
+      }
+      return false;
+    };
 
+    const backHandler = BackHandler.addEventListener("hardwareBackPress", backAction);
+    Signal.Register(redirect);
     return () => {
       Signal.Close();
+      backHandler.remove();
     };
   }, []);
 
@@ -46,19 +112,33 @@ export default function App() {
       <MyStatusBar backgroundColor="#1D9B94" barStyle="light-content" />
       {showWebView && (
         <WebView
+          ref={webviewRef}
           source={{ uri: webViewSource }}
           automaticallyAdjustContentInsets={true}
           startInLoadingState={true}
           originWhitelist={["*"]}
+          javaScriptEnabled={true}
+          domStorageEnabled={true}
+          onMessage={onMessage}
+          onLoad={injectShareScript}
+          allowsBackForwardNavigationGestures={true}
+          pullToRefreshEnabled={true}
+          // incognito={true}
+          style={{ width: "100%", height: "100%" }}
           renderLoading={() => (
             <View style={styles.bg}>
               <Image style={styles.gif} source={require("./assets/splash.gif")} />
             </View>
           )}
-          javaScriptEnabled={true}
-          domStorageEnabled={true}
-          // incognito={true}
-          style={{ width: "100%", height: "100%" }}
+          onShouldStartLoadWithRequest={({ url }) => {
+            if (url.startsWith(Website)) return true;
+            WebBrowser.openBrowserAsync(url);
+            return false;
+          }}
+          onFileDownload={({ nativeEvent: { downloadUrl } }) => {
+            // This will open the file in a default browser
+            if (downloadUrl) Linking.openURL(downloadUrl);
+          }}
         />
       )}
     </View>
