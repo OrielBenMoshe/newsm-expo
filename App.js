@@ -22,14 +22,14 @@ const MyStatusBar = ({ backgroundColor, ...props }) => (
     </SafeAreaView>
   </View>
 );
-const Website = "https://newsm.co.il";
+const Website = "https://newsm.co.il/";
 
 export default function App() {
   const [webViewSource, setWebViewSource] = useState(Website);
   const [showWebView, setShowWebview] = useState(true);
   const webviewRef = useRef(null);
 
-  // Function to inject JavaScript code into the WebView
+  // Inject JavaScript for share functionality
   const injectShareScript = () => {
     const script = `
     (function() {
@@ -71,15 +71,13 @@ export default function App() {
     webviewRef.current.injectJavaScript(script);
   };
 
-  // Handle messages received from the WebView
+  // Handle WebView messages
   const onMessage = (event) => {
     const url = event.nativeEvent.data;
-    Share.share({
-      message: `Check this out: ${url}`,
-      url: url, // Some platforms might use this field
-    });
+    Share.share({ message: `Check this out: ${url}`, url });
   };
 
+  // WebView redirection logic
   const redirect = useCallback((data) => {
     if (data.targetUrl) {
       setShowWebview(false);
@@ -90,6 +88,7 @@ export default function App() {
     }
   }, []);
 
+  // Handling back button press
   useEffect(() => {
     const backAction = () => {
       if (webviewRef.current) {
@@ -123,7 +122,8 @@ export default function App() {
           onLoad={injectShareScript}
           allowsBackForwardNavigationGestures={true}
           pullToRefreshEnabled={true}
-          // incognito={true}
+      
+          setSupportMultipleWindows={false}
           style={{ width: "100%", height: "100%" }}
           renderLoading={() => (
             <View style={styles.bg}>
