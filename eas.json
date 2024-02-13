@@ -29,11 +29,13 @@
         "credentialsSource": "remote",
         "channel": "main",
         "distribution": "store",
-        "workflow": "managed", // or "generic" if you have a bare workflow
         "android": {
           "credentialsSource": "local",
           "gradleCommand": ":app:assembleRelease",
-          "buildType": "app-bundle"
+          "release": {
+            "workflow": "managed", // or "generic" if you have a bare workflow
+            "buildType": "app-bundle"
+          }
         },
         "autoIncrement": true
       }
