@@ -31,11 +31,8 @@
         "distribution": "store",
         "android": {
           "credentialsSource": "local",
-          "gradleCommand": ":app:assembleRelease",
-          "release": {
-            "workflow": "managed", // or "generic" if you have a bare workflow
-            "buildType": "app-bundle"
-          }
+          "buildType": "app-bundle",
+          "gradleCommand": ":app:assembleRelease"
         },
         "autoIncrement": true
       }
