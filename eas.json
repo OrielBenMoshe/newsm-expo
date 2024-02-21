@@ -30,14 +30,18 @@
         "channel": "main",
         "distribution": "store",
         "android": {
-          "credentialsSource": "local",
-          "buildType": "app-bundle",
-          "gradleCommand": ":app:assembleRelease"
+          "credentialsSource": "local"
         },
         "autoIncrement": true
       }
     },
     "submit": {
+      "internal": {
+        "android": {
+          "serviceAccountKeyPath": "./credentials/android/newssmnotifications-firebase-adminsdk.json",
+          "track": "internal"
+        }
+      },
       "production": {
         "android": {
           "serviceAccountKeyPath": "./credentials/android/newssmnotifications-firebase-adminsdk.json",

@@ -2,7 +2,7 @@
   "expo": {
     "name": "מבט חדש",
     "slug": "newsm-expo",
-    "version": "1.0.0",
+    "version": "1.0.20",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -19,13 +19,13 @@
       "bundleIdentifier": "com.newsn.news",
       "buildNumber": "1"
     },
-    "android": {
+     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/android.png",
         "backgroundColor": "#F2F2F2"
       },
       "package": "il.co.newsm",
-      "versionCode": 7
+      "versionCode": 9
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -62,7 +62,8 @@
           "iPhoneDeploymentTarget": "13.0",
           "smallIcons": [
             "./assets/ic_stat_onesignal_default.png"
-          ]
+          ],
+          "smallIconAccentColor": "#1d9b94"
         }
       ]
     ],
