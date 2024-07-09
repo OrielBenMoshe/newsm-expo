@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "מבט חדש",
-    "slug": "newsm-expo",
+    "name": "רגע חדשות",
+    "slug": "rega-news",
     "version": "1.0.20",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -16,22 +16,22 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.newsn.news",
+      "bundleIdentifier": "il.co.reganews",
       "buildNumber": "1"
     },
-     "android": {
+    "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/android.png",
         "backgroundColor": "#F2F2F2"
       },
-      "package": "il.co.newsm",
-      "versionCode": 9
+      "package": "il.co.reganews",
+      "versionCode": 10
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
-      "oneSignalAppId": "a3336b5e-56d9-4473-8f20-7ef9f7b2efb9",
+      "oneSignalAppId": "5de75774-3388-41d2-beb0-6c12346ad52c",
       "eas": {
         "build": {
           "experimental": {
@@ -45,12 +45,21 @@
                       "group.com.newsn.news.onesignal"
                     ]
                   }
+                },
+                {
+                  "targetName": "OneSignalNotificationServiceExtension",
+                  "bundleIdentifier": "com.newsn.news.OneSignalNotificationServiceExtension",
+                  "entitlements": {
+                    "com.apple.security.application-groups": [
+                      "group.com.newsn.news.onesignal"
+                    ]
+                  }
                 }
               ]
             }
           }
         },
-        "projectId": "a9816411-0dbc-408c-abbc-fc879c56057b"
+        "projectId": "a9b81895-cfb5-41f4-97e5-5fb32db94d36~"
       }
     },
     "plugins": [

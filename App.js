@@ -22,7 +22,7 @@ const MyStatusBar = ({ backgroundColor, ...props }) => (
     </SafeAreaView>
   </View>
 );
-const Website = "https://newsm.co.il/";
+const Website = "https://reganews.co.il";
 
 export default function App() {
   const [webViewSource, setWebViewSource] = useState(Website);

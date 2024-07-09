@@ -38,13 +38,13 @@
     "submit": {
       "internal": {
         "android": {
-          "serviceAccountKeyPath": "./credentials/android/newssmnotifications-firebase-adminsdk.json",
+          "serviceAccountKeyPath": "./credentials/android/rega-news-notifications-firebase-adminsdk-2t9m6-46d13748da.json",
           "track": "internal"
         }
       },
       "production": {
         "android": {
-          "serviceAccountKeyPath": "./credentials/android/newssmnotifications-firebase-adminsdk.json",
+          "serviceAccountKeyPath": "./credentials/android/rega-news-notifications-firebase-adminsdk-2t9m6-46d13748da.json",
           "track": "production"
         }
       }
